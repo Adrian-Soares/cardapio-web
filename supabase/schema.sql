@@ -11,7 +11,13 @@ create table pizzarias (
   nome text not null,
   slug text not null unique,
   logo_url text,
+  banner_url text,        -- imagem do banner do topo | null = imagem padrão
   whatsapp text not null, -- formato: 5511999999999 (código do país + DDD + número)
+  cidade text,            -- ex.: "Maricá - RJ" | null = não mostra no cardápio
+  horarios jsonb,         -- { seg: { aberto, abre, fecha }, ter: {...}, ... } | null = sem horário
+  taxa_entrega numeric(10, 2), -- null = não cobra taxa de entrega
+  pedido_minimo numeric(10, 2), -- null = sem pedido mínimo
+  meio_preco text not null default 'maior', -- preço do meio a meio: 'maior' | 'media'
   created_at timestamptz not null default now()
 );
 
@@ -20,6 +26,7 @@ create table categorias (
   pizzaria_id uuid not null references pizzarias (id) on delete cascade,
   nome text not null,
   ordem integer not null default 0,
+  permite_meio boolean not null default false, -- aceita montar meio a meio
   created_at timestamptz not null default now()
 );
 

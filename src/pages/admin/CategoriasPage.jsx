@@ -77,6 +77,24 @@ export default function CategoriasPage() {
     carregar()
   }
 
+  async function alternarMeio(cat) {
+    const { error } = await supabase
+      .from('categorias')
+      .update({ permite_meio: !cat.permite_meio })
+      .eq('id', cat.id)
+    if (error) {
+      console.error(error)
+      setErro(
+        error.code === 'PGRST204' || error.code === '42703'
+          ? 'Para ativar o meio a meio, rode a migração supabase/add-meio.sql no Supabase.'
+          : 'Não foi possível alterar o meio a meio.'
+      )
+      return
+    }
+    setErro(null)
+    carregar()
+  }
+
   async function mover(indice, direcao) {
     const destino = indice + direcao
     if (destino < 0 || destino >= categorias.length) return
@@ -169,6 +187,14 @@ export default function CategoriasPage() {
                   </>
                 ) : (
                   <>
+                    <label className="cat-meio">
+                      <input
+                        type="checkbox"
+                        checked={!!cat.permite_meio}
+                        onChange={() => alternarMeio(cat)}
+                      />
+                      Meio a meio
+                    </label>
                     <button
                       type="button"
                       className="btn btn-mini"

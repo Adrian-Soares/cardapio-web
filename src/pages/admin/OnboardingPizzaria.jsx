@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { supabase } from '../../lib/supabase.js'
 import { gerarSlug } from '../../lib/storage.js'
 
-// Mostrado quando o usuário logado ainda não tem pizzaria cadastrada.
+// Mostrado quando o usuário logado ainda não tem estabelecimento cadastrado.
 export default function OnboardingPizzaria({ userId, onCriada }) {
   const [nome, setNome] = useState('')
   const [slug, setSlug] = useState('')
@@ -38,7 +38,7 @@ export default function OnboardingPizzaria({ userId, onCriada }) {
       setErro(
         error.code === '23505'
           ? 'Esse endereço (slug) já está em uso. Escolha outro.'
-          : 'Não foi possível criar a pizzaria. Tente novamente.'
+          : 'Não foi possível criar o estabelecimento. Tente novamente.'
       )
       return
     }
@@ -49,17 +49,17 @@ export default function OnboardingPizzaria({ userId, onCriada }) {
   return (
     <main className="login-pagina">
       <form className="login-card" onSubmit={criar}>
-        <h1>🍕 Bem-vindo!</h1>
-        <p className="login-subtitulo">Cadastre sua pizzaria para começar</p>
+        <h1>Bem-vindo!</h1>
+        <p className="login-subtitulo">Cadastre seu estabelecimento para começar</p>
 
         <label>
-          Nome da pizzaria
+          Nome do estabelecimento
           <input
             type="text"
             required
             value={nome}
             onChange={(e) => aoMudarNome(e.target.value)}
-            placeholder="Ex.: Pizzaria do João"
+            placeholder="Ex.: Restaurante do João"
           />
         </label>
 
@@ -73,7 +73,7 @@ export default function OnboardingPizzaria({ userId, onCriada }) {
               setSlug(e.target.value)
               setSlugEditado(true)
             }}
-            placeholder="pizzaria-do-joao"
+            placeholder="restaurante-do-joao"
           />
           <small className="campo-dica">
             Seu cardápio ficará em: {window.location.origin}/{gerarSlug(slug) || 'seu-endereco'}
@@ -94,7 +94,7 @@ export default function OnboardingPizzaria({ userId, onCriada }) {
         {erro && <p className="form-erro">{erro}</p>}
 
         <button type="submit" className="btn btn-primario" disabled={enviando}>
-          {enviando ? 'Criando…' : 'Criar pizzaria'}
+          {enviando ? 'Criando…' : 'Criar estabelecimento'}
         </button>
       </form>
     </main>

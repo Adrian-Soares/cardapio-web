@@ -3,6 +3,7 @@ import { Navigate, NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { supabase } from '../../lib/supabase.js'
 import { useAuth } from '../../context/AuthContext.jsx'
 import { useTemaAdmin } from '../../hooks/useTemaAdmin.js'
+import { montarLinkCardapio } from '../../lib/format.js'
 import OnboardingPizzaria from './OnboardingPizzaria.jsx'
 import '../../styles/admin.css'
 
@@ -29,7 +30,7 @@ export default function AdminLayout() {
       if (!ativo) return
       if (error) {
         console.error(error)
-        setErro('Não foi possível carregar os dados da pizzaria.')
+        setErro('Não foi possível carregar os dados do estabelecimento.')
       } else {
         setPizzaria(data)
       }
@@ -63,7 +64,7 @@ export default function AdminLayout() {
           {pizzaria.logo_url ? (
             <img src={pizzaria.logo_url} alt="" className="admin-nav-logo" />
           ) : (
-            <span className="admin-nav-logo admin-nav-logo--vazio">🍕</span>
+            <span className="admin-nav-logo admin-nav-logo--vazio">🍽️</span>
           )}
           <strong>{pizzaria.nome}</strong>
         </div>
@@ -74,11 +75,17 @@ export default function AdminLayout() {
           </NavLink>
           <NavLink to="/admin/produtos">Produtos</NavLink>
           <NavLink to="/admin/categorias">Categorias</NavLink>
+          <NavLink to="/admin/bordas">Bordas</NavLink>
           <NavLink to="/admin/configuracoes">Configurações</NavLink>
         </nav>
 
         <div className="admin-nav-rodape">
-          <a href={`/${pizzaria.slug}`} target="_blank" rel="noreferrer" className="link-cardapio">
+          <a
+            href={montarLinkCardapio(pizzaria.slug)}
+            target="_blank"
+            rel="noreferrer"
+            className="link-cardapio"
+          >
             Ver cardápio ↗
           </a>
           <button type="button" className="btn btn-sair" onClick={handleSair}>

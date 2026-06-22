@@ -3,28 +3,31 @@ import { createContext, useContext, useMemo, useState } from 'react'
 const CartContext = createContext(null)
 
 export function CartProvider({ children }) {
-  // item: { key, produtoId, produtoNome, tamanhoId, tamanhoNome, preco, qtd }
+  // item normal: { key, tipo:'normal', produtoNome, tamanhoNome, preco, qtd }
+  // item meio:   { key, tipo:'meio', produtoNome:'Meio a meio', tamanhoNome, metades:[a,b], preco, qtd }
   const [itens, setItens] = useState([])
 
-  function adicionar(produto, tamanho) {
-    const key = `${produto.id}:${tamanho.id}`
+  // Adiciona um item já montado; se a mesma key já existe, soma a quantidade.
+  function adicionarItem(novo) {
     setItens((atual) => {
-      const existente = atual.find((i) => i.key === key)
+      const existente = atual.find((i) => i.key === novo.key)
       if (existente) {
-        return atual.map((i) => (i.key === key ? { ...i, qtd: i.qtd + 1 } : i))
+        return atual.map((i) =>
+          i.key === novo.key ? { ...i, qtd: i.qtd + (novo.qtd ?? 1) } : i
+        )
       }
-      return [
-        ...atual,
-        {
-          key,
-          produtoId: produto.id,
-          produtoNome: produto.nome,
-          tamanhoId: tamanho.id,
-          tamanhoNome: tamanho.nome,
-          preco: Number(tamanho.preco),
-          qtd: 1,
-        },
-      ]
+      return [...atual, { qtd: 1, ...novo }]
+    })
+  }
+
+  function adicionar(produto, tamanho) {
+    adicionarItem({
+      key: `${produto.id}:${tamanho.id}`,
+      tipo: 'normal',
+      produtoNome: produto.nome,
+      tamanhoNome: tamanho.nome,
+      preco: Number(tamanho.preco),
+      qtd: 1,
     })
   }
 
@@ -51,7 +54,9 @@ export function CartProvider({ children }) {
   )
 
   return (
-    <CartContext.Provider value={{ itens, total, qtdTotal, adicionar, alterarQtd, limpar }}>
+    <CartContext.Provider
+      value={{ itens, total, qtdTotal, adicionar, adicionarItem, alterarQtd, limpar }}
+    >
       {children}
     </CartContext.Provider>
   )
@@ -62,3 +67,4 @@ export function useCart() {
   if (!ctx) throw new Error('useCart deve ser usado dentro de CartProvider')
   return ctx
 }
+
