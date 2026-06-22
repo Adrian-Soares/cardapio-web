@@ -1580,8 +1580,17 @@ button {
   max-width: 560px;
   max-height: 88vh;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   border-radius: 22px 22px 0 0;
   padding: 26px 22px 24px;
+}
+
+.drawer::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
 }
 
 .drawer::before {

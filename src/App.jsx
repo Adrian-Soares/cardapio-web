@@ -10,10 +10,13 @@ import CategoriasPage from './pages/admin/CategoriasPage.jsx'
 import BordasPage from './pages/admin/BordasPage.jsx'
 import ConfiguracoesPage from './pages/admin/ConfiguracoesPage.jsx'
 
+// Deriva o basename do base do Vite: "/" na Hostinger, "/cardapio-web/" no GitHub Pages.
+const basename = import.meta.env.BASE_URL.replace(/\/$/, '') || undefined
+
 export default function App() {
   return (
     <AuthProvider>
-      <BrowserRouter basename="/cardapio-web">
+      <BrowserRouter basename={basename}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/admin/login" element={<LoginPage />} />
