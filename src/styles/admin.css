@@ -1202,32 +1202,48 @@
 
 .dashboard-link {
   flex: 1;
-  min-width: 220px;
-  display: flex;
-  align-items: center;
+  min-width: 0;
   background: var(--cor-superficie);
   border: 1px dashed var(--cor-borda);
   border-radius: 8px;
-  padding: 10px 14px;
-  font-size: 0.95rem;
-  overflow-wrap: anywhere;
+  padding: 8px 12px;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   user-select: all;
 }
 
 .btn-copiar {
   flex-shrink: 0;
-  white-space: nowrap;
+  align-self: stretch;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  border: none;
+  border-radius: 8px;
+  background: var(--cor-primaria);
+  color: #fff;
+  cursor: pointer;
   transition: transform 160ms var(--ease-out), background 220ms var(--ease-out);
 }
 
+.btn-copiar svg {
+  width: 19px;
+  height: 19px;
+}
+
+.btn-copiar:hover {
+  background: var(--cor-primaria-escura);
+}
+
 .btn-copiar:active {
-  transform: scale(0.97);
+  transform: scale(0.94);
 }
 
-.btn-copiar--ok {
-  background: var(--cor-whatsapp, #1faa53);
-}
-
-.btn-copiar--ok:hover:not(:disabled) {
+.btn-copiar--ok,
+.btn-copiar--ok:hover {
   background: var(--cor-whatsapp, #1faa53);
 }
