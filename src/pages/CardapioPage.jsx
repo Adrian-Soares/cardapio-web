@@ -32,27 +32,29 @@ function CategoriaIcone({ nome }) {
   if (/bebida|refri|suco|drink|agua|cerveja|coca|guaran/.test(n)) {
     return (
       <svg {...props}>
-        <path d="M7 8h10l-1 11.2a1 1 0 0 1-1 .8H9a1 1 0 0 1-1-.8L7 8z" />
-        <path d="M6 8h12" />
-        <line x1="14" y1="3.6" x2="16" y2="8" />
+        <path d="M6.6 7.6h10.8l-1.1 11.2a1.6 1.6 0 0 1-1.6 1.45H9.3a1.6 1.6 0 0 1-1.6-1.45L6.6 7.6Z" />
+        <path d="M5.5 7.6h13" />
+        <path d="M13.3 3.5 15.5 7.6" />
+        <path d="M9.3 12h5.4" />
       </svg>
     )
   }
   if (/pizza/.test(n)) {
     return (
       <svg {...props}>
-        <path d="M4 7c4-2.4 12-2.4 16 0l-8 13.2z" />
-        <circle cx="10" cy="9.3" r="1" fill="currentColor" stroke="none" />
-        <circle cx="13.6" cy="9.7" r="1" fill="currentColor" stroke="none" />
-        <circle cx="11.7" cy="12.6" r="1" fill="currentColor" stroke="none" />
+        <path d="M12 20.5 4.7 6.9c4.5-2.2 10.1-2.2 14.6 0L12 20.5Z" />
+        <path d="M6.7 8.4c3.3-1.4 7.3-1.4 10.6 0" />
+        <circle cx="9.9" cy="11" r="1.05" fill="currentColor" stroke="none" />
+        <circle cx="13.9" cy="11.3" r="1.05" fill="currentColor" stroke="none" />
+        <circle cx="11.9" cy="14.8" r="1.05" fill="currentColor" stroke="none" />
       </svg>
     )
   }
   return (
     <svg {...props}>
-      <path d="M5 3v5a2.2 2.2 0 0 0 4.4 0V3" />
-      <path d="M7.2 10v11" />
-      <path d="M17 3c-1.6 0-2.8 2.6-2.8 5.6 0 2.1 1 3.5 2.1 3.9V21" />
+      <path d="M6.3 3v4a2 2 0 0 0 4 0V3" />
+      <path d="M8.3 9.4V21" />
+      <path d="M16.8 3c-1.7 0-3 2.6-3 5.8 0 2.2 1.1 3.7 2.3 4.1V21" />
     </svg>
   )
 }
