@@ -4,7 +4,11 @@
       "PowerShell(npm create vite@latest . -- --template react --yes)",
       "Skill(anthropic-skills:impeccable)",
       "Skill(anthropic-skills:impeccable:*)",
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "Bash(npm run *)",
+      "Bash(git add *)",
+      "Bash(git reset *)",
+      "Bash(git commit -q -m 'Deploy para Hostinger e GitHub Pages *)"
     ]
   }
 }

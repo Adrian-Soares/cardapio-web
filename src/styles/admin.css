@@ -354,11 +354,20 @@
 }
 
 .admin-nav nav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   padding: 10px 12px;
   border-radius: 8px;
   text-decoration: none;
   color: var(--cor-texto);
   font-weight: 500;
+}
+
+.admin-nav nav a svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
 
 .admin-nav nav a:hover {
@@ -368,6 +377,12 @@
 .admin-nav nav a.active {
   background: var(--cor-primaria);
   color: #fff;
+}
+
+/* Topo e barra inferior aparecem só no mobile (media query abaixo) */
+.admin-topbar,
+.admin-tabbar {
+  display: none;
 }
 
 .admin-nav-rodape {
@@ -395,38 +410,142 @@
   min-width: 0;
 }
 
-/* Mobile: nav vira barra no topo */
+/* ===== Mobile: topo enxuto + barra inferior (tab bar) ===== */
 @media (max-width: 720px) {
   .admin {
     flex-direction: column;
   }
 
   .admin-nav {
-    width: auto;
-    border-right: none;
-    border-bottom: 1px solid var(--cor-borda);
-    padding: 12px 14px;
-    gap: 12px;
+    display: none;
   }
 
-  .admin-nav nav {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  .admin-nav nav a {
-    padding: 8px 10px;
-    font-size: 0.9rem;
-  }
-
-  .admin-nav-rodape {
-    flex-direction: row;
+  .admin-topbar {
+    display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    padding: 10px 14px;
+    background: var(--cor-superficie);
+    border-bottom: 1px solid var(--cor-borda);
+  }
+
+  .admin-topbar-marca {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .admin-topbar-marca .admin-nav-logo {
+    width: 34px;
+    height: 34px;
+  }
+
+  .admin-topbar-marca strong {
+    font-size: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .admin-topbar-acoes {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .admin-topbar-acoes a,
+  .admin-topbar-acoes button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 11px;
+    background: var(--cor-fundo);
+    color: var(--cor-texto);
+  }
+
+  .admin-topbar-acoes svg {
+    width: 20px;
+    height: 20px;
   }
 
   .admin-conteudo {
-    padding: 20px 16px 60px;
+    padding: 18px 14px 92px;
+  }
+
+  .admin-tabbar {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 30;
+    gap: 2px;
+    padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+    background: var(--cor-superficie);
+    border-top: 1px solid var(--cor-borda);
+    box-shadow: 0 -2px 14px -8px rgba(80, 40, 20, 0.35);
+  }
+
+  .admin-tab {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 6px 2px;
+    min-height: 52px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--cor-texto-suave);
+    font-size: 0.66rem;
+    font-weight: 600;
+  }
+
+  .admin-tab svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .admin-tab span {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .admin-tab.active {
+    color: var(--cor-primaria);
+  }
+
+  /* Listas: ações com alvo de toque maior, ocupando a linha */
+  .lista-admin-acoes {
+    width: 100%;
+  }
+
+  .lista-admin-acoes .btn {
+    flex: 1 1 auto;
+    min-height: 42px;
+  }
+
+  /* Formulários de uma linha empilham (campo + botão) */
+  .form-linha {
+    flex-wrap: wrap;
+  }
+
+  .form-linha input,
+  .form-linha .input-preco,
+  .form-linha .btn {
+    flex: 1 1 100%;
   }
 }
 
